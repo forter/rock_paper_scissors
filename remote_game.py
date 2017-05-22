@@ -38,20 +38,20 @@ class RemoteGame(Game):
             self.write_to_other_player(self.name)
         else:
             self.conn.send('Welcome to %s game zone\n' % self.name)
-            other_name = self.conn.recv(BUFFER_SIZE)
+            self.other_name = self.conn.recv(BUFFER_SIZE)
         for _ in xrange(5):
             if self.remote:
                 self.write_to_other_player(self.normalize(self.each_turn()))
                 print 'Waiting for response'
                 print self.s.recv(BUFFER_SIZE)
             else:
-                print 'Waiting for %s to response' % other_name
+                print 'Waiting for %s to response' % self.other_name
                 other = self.conn.recv(BUFFER_SIZE)
                 my = self.normalize(self.each_turn())
                 result = '~' * 10
-                result += self.fight(my, other).format(p1=self.name, p2=other_name)
+                result += self.fight(my, other).format(p1=self.name, p2=self.other_name)
                 result += '~' * 10
-                result += "\n{p1}: {s1}\n{p2}: {s2}".format(p1=self.name, p2=other_name, s1=self.my_score, s2=self.other_score)
+                result += "\n{p1}: {s1}\n{p2}: {s2}".format(p1=self.name, p2=self.other_name, s1=self.my_score, s2=self.other_score)
                 print result
                 self.write_to_other_player(result)
         if self.remote:
