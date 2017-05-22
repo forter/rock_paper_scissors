@@ -62,7 +62,9 @@ class Game(object):
             print 'Computer Score: %s' % self.other_score
             player = self.each_turn(computer)
             player = self.normalize(player)
+            print '~' * 10
             print self.fight(player, computer).format(p1=self.name, p2=self.other_name)
+            print '~' * 10
         print self.winner()
 
     @staticmethod

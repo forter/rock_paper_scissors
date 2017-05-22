@@ -10,9 +10,9 @@ class RemoteGame(Game):
 
     def __init__(self):
         self.name = raw_input('Please fill your name: ')
-        self.serv = raw_input('Connect to remote server? (t/F) ')
+        self.serv = raw_input('Connect to remote server? (y/N) ')
         self.remote = None
-        if self.serv.lower().startswith('t'):
+        if self.serv.lower().startswith('y'):
             self.remote = raw_input('Enter remote IP: ') or '127.0.0.1'
             self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.s.connect((self.remote, TCP_PORT))
