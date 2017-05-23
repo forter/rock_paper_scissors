@@ -3,7 +3,7 @@ from remote_game import RemoteGame
 
 class ImplementedGame(RemoteGame):
     @staticmethod
-    def each_turn():
+    def each_turn(round_number):
         return 'rock'
 
 
